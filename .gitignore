@@ -1,0 +1,18 @@
+.idea
+# Exclude VS Code settings
+.vscode/
+
+# Exclude VS Code workspace settings
+.code-workspace
+
+# Exclude user-specific VS Code settings
+.vscode/settings.json
+
+# Exclude user-specific VS Code keybindings
+.vscode/keybindings.json
+
+# Exclude VS Code extensions folder (optional)
+.vscode/extensions/
+
+# Ignore macOS .DS_Store files
+.DS_Store
