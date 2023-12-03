@@ -47,19 +47,20 @@ for row = 1:8:256
         % Step 8: Zig-zag scanning
         seqCoef = zigzag(quantized_block);
 
+        % Step 9: Differential coding
         % DC value:
         dif = seqCoef(1) - dcAnt;
-        
-        % Encoding DC:
+
+        % Encoding DC: DPCM
         codeDC = codifDC(dif);
-        
-        % Encoding AC:
+
+        % Encoding AC: in [(r,s), c] pattern
         codeAC = codifAC(seqCoef);
-        
+
         % Updating jpeg_coded bitstream with the current codeBlock.
         codeBlock = [codeDC codeAC];
         jpeg_coded = [jpeg_coded codeBlock];
-        
+
         % Updating the previous DC coefficient.
         dcAnt = seqCoef(1);
 
