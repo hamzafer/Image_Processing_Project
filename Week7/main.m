@@ -14,7 +14,7 @@ imshow(grayImage);
 title('Original Image');
 
 %------------------------DCT----------------------
-dctImage = dct2(grayImage);
+dctImage = dct2(doubleGrayImage);
 subplot(3, 4, 2);
 imshow(log(abs(dctImage)),[]);
 title('DCT of the image');
@@ -54,13 +54,18 @@ imshow(reconstructedWHT, []);
 title('Reconstructed Image from WHT');
 
 %------------------------Error Calculations----------------------
+
+% After reconstruction, convert the images back to the same scale as the original
+reconstructedDCT_uint8 = uint8(reconstructedDCT * 255);
+reconstructedWHT_uint8 = uint8(reconstructedWHT * 255);
+
 % DCT Errors
-dctMSE = immse(doubleGrayImage, reconstructedDCT);
+dctMSE = immse(grayImage, reconstructedDCT_uint8);
 dctRMSE = sqrt(dctMSE);
 dctPSNR = 10 * log10(256 * 256 / dctMSE);
 
 % WHT Errors
-whtMSE = immse(doubleGrayImage, reconstructedWHT);
+whtMSE = immse(grayImage, reconstructedWHT_uint8);
 whtRMSE = sqrt(whtMSE);
 whtPSNR = 10 * log10(256 * 256 / whtMSE);
 
