@@ -2,11 +2,11 @@ function [ code ] = code_value( value )
 
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-% EXPLICACIONS:
-% A aquesta funció li passem un valor (value) i el codifica. Primer el
-% passa a binari i després, si el valor que codifiquem és negatiu (més
-% petit que zero) invertim els bits (és a dir els 1 passen a ser 0 i vice
-% versa.
+% EXPLANATIONS:
+% To this function, we pass a value (value) and encode it. First, it
+% converts the value to binary and then, if the value being encoded is negative
+% (less than zero), we invert the bits (that is, 1s become 0s and vice
+% versa).
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 

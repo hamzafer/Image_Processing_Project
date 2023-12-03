@@ -2,9 +2,10 @@ function [ category ] = find_category_AC( value )
 
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-% EXPLICACIONS:
-% A aquesta funció li passem un valor (value) i ens busca a quina categoria
-% (de 0 a 11) pertany i ens la retorna (category).
+% EXPLANATIONS:
+% To this function, we pass a value that is the category we want
+% to encode, and we encode it using a predetermined Huffman table.
+% We return a string of 'char' with the encoded value of the category.
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 

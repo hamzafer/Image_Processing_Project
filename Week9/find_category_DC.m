@@ -2,9 +2,9 @@ function [ category ] = find_category( value )
 
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-% EXPLICACIONS:
-% A aquesta funció li passem un valor (value) i ens busca a quina categoria
-% (de 0 a 11) pertany i ens la retorna (category).
+% EXPLANATIONS:
+% This function takes a value (value) and determines which category
+% (from 0 to 11) it belongs to, then returns this category (category).
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 

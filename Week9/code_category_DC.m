@@ -2,10 +2,10 @@ function [ code ] = code_category_DC( category )
 
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
-% EXPLICACIONS:
-% A aquesta funció li passem un valor que és la categoria que volem
-% codificar, i la codifiquem amb una taula Huffmann predeterminada.
-% Retornem una cadena de 'char' amb el valor de la categoria codificat.
+% EXPLANATIONS:
+% To this function, we pass a value that is the category we want
+% to encode, and we encode it using a predetermined Huffman table.
+% We return a string of 'char' with the encoded value of the category.
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 
