@@ -1,4 +1,5 @@
 .idea
+*.asv
 # Exclude VS Code settings
 .vscode/
 
