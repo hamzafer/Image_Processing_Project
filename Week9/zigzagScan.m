@@ -1,4 +1,4 @@
-function [out] = zigzag(in)
+function [out] = zigzagScan(in)
 % Zig-zag scanning
 % This function is used to rearrange a matrix of any size into a 1-D array
 % by implementing the ZIG-ZAG SCANNING procedure.

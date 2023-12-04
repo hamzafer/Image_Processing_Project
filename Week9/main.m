@@ -1,12 +1,11 @@
-% Path to the image file
-imagePath = 'image_gs.png';
+% Path to the grayscale image file
+grayscaleImagePath = 'image_gs.png';
 
-% Call the converttToGrayscale function
 % Step 1: Load your 256x256 grayscale image
-grayscale_matrix = convertToGrayscale(imagePath);
+grayscaleImage = convertToGrayscale(grayscaleImagePath);
 
-% Define the quantization matrix
-quantization_matrix = [
+% Define the JPEG quantization matrix
+jpegQuantMatrix = [
     16, 11, 10, 16, 24, 40, 51, 61;
     12, 12, 14, 19, 26, 58, 60, 55;
     14, 13, 16, 24, 40, 57, 69, 56;
@@ -18,54 +17,51 @@ quantization_matrix = [
 ];
 
 % Step 2: Subtract 128 from each pixel value
-grayscale_matrix = grayscale_matrix - 128;
+normalizedImage = grayscaleImage - 128;
 
 % Step 4: Create and store 1024 (each of 8x8) blocks
-processed_blocks = zeros(size(grayscale_matrix));
+dctQuantizedBlocks = zeros(size(normalizedImage));
 
-% Before going block to block through the matrix, we have to initialize the previous DC coefficient.
-dcAnt = 0;
-jpeg_coded = char.empty;
+% Initialize the previous DC coefficient
+previousDC = 0;
+
+% Initialize encoded JPEG bitstream
+jpegBitstream = '';
 
 % Process each 8x8 block
 for row = 1:8:256
     for col = 1:8:256
-        % Calculating block indices
-        i = (row - 1) / 8 + 1;
-        j = (col - 1) / 8 + 1;
-
         % Step 3: Segment image in 8 × 8 blocks
-        block = grayscale_matrix(row:row+7, col:col+7);
+        block = normalizedImage(row:row+7, col:col+7);
 
         % Step 5: Compute DCT of each block
-        block_dct = dct2(block);
+        dctBlock = dct2(block);
 
         % Step 6: Perform Quantization
         % Step 7: Round your answers
-        quantized_block = round(block_dct ./ quantization_matrix);
+        quantizedBlock = round(dctBlock ./ jpegQuantMatrix);
 
         % Step 8: Zig-zag scanning
-        seqCoef = zigzag(quantized_block);
+        zigzagSequence = zigzagScan(quantizedBlock);
 
         % Step 9: Differential coding
-        % DC value:
-        dif = seqCoef(1) - dcAnt;
-
         % Encoding DC: DPCM
-        codeDC = codifDC(dif);
+        dcDiff = zigzagSequence(1) - previousDC;
+        encodedDC = encodeDC(dcDiff);
 
         % Encoding AC: in [(r,s), c] pattern
-        codeAC = codifAC(seqCoef);
+        encodedAC = encodeAC(zigzagSequence);
 
-        % Updating jpeg_coded bitstream with the current codeBlock.
-        codeBlock = [codeDC codeAC];
-        jpeg_coded = [jpeg_coded codeBlock];
+        % Combine DC and AC encoded data
+        encodedBlock = [encodedDC, encodedAC];
 
-        % Updating the previous DC coefficient.
-        dcAnt = seqCoef(1);
+        % Append the encoded data to the bitstream
+        jpegBitstream = [jpegBitstream, encodedBlock];
 
-        % Store the processed block
-        coded{i,j} = codeBlock;
+        % Update the previous DC coefficient
+        previousDC = zigzagSequence(1);
+
+        % Store the encoded block data
+        dctQuantizedBlocks(row:row+7, col:col+7) = quantizedBlock;
     end
 end
-
