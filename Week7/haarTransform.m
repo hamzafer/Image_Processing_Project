@@ -1,4 +1,4 @@
-function transformedMatrix = haarTransform(inputMatrix)
+function transformedMatrix = haarTransform(inputMatrix, scalingFactor)
     % haarTransform - Applies the Haar wavelet transform to an input matrix.
     %
     % Syntax: transformedMatrix = haarTransform(inputMatrix)
@@ -17,8 +17,8 @@ function transformedMatrix = haarTransform(inputMatrix)
     % this performs the transform across log2(256/16) = log2(16) = 4 levels.
     while matrixSize > 16
         % Apply row and column Haar transforms
-        transformedRows = haarRowTransform(transformedMatrix(1:matrixSize, 1:matrixSize));
-        transformedCols = haarColTransform(transformedRows);
+        transformedRows = haarRowTransform(transformedMatrix(1:matrixSize, 1:matrixSize), scalingFactor);
+        transformedCols = haarColTransform(transformedRows, scalingFactor);
 
         % Update the matrix with the transformed data
         transformedMatrix(1:matrixSize, 1:matrixSize) = transformedCols;

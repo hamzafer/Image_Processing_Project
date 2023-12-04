@@ -1,4 +1,4 @@
-function reconstructedMatrix = inverseHaarTransform(transformedMatrix)
+function reconstructedMatrix = inverseHaarTransform(transformedMatrix, scalingFactor)
     % inverseHaarTransform - Applies the inverse Haar wavelet transform to a matrix.
     %
     % Syntax: reconstructedMatrix = inverseHaarTransform(transformedMatrix)
@@ -17,8 +17,8 @@ function reconstructedMatrix = inverseHaarTransform(transformedMatrix)
     % Apply the inverse Haar transform iteratively
     while currentSize <= totalSize
         % Apply inverse column and row Haar transforms
-        inverseTransformedCols = inverseHaarColTransform(reconstructedMatrix(1:currentSize, 1:currentSize));
-        inverseTransformedRows = inverseHaarRowTransform(inverseTransformedCols);
+        inverseTransformedCols = inverseHaarColTransform(reconstructedMatrix(1:currentSize, 1:currentSize), scalingFactor);
+        inverseTransformedRows = inverseHaarRowTransform(inverseTransformedCols, scalingFactor);
 
         % Update the matrix with the inversely transformed data
         reconstructedMatrix(1:currentSize, 1:currentSize) = inverseTransformedRows;

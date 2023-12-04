@@ -1,4 +1,4 @@
-function originalCols = inverseHaarColTransform(transformedCols)
+function originalCols = inverseHaarColTransform(transformedCols, scalingFactor)
     % inverseHaarColTransform - Apply the inverse Haar wavelet transform to each column.
     %
     % Syntax: originalCols = inverseHaarColTransform(transformedCols)
@@ -14,10 +14,10 @@ function originalCols = inverseHaarColTransform(transformedCols)
         rowIndex = 1;
         for elementIndex = 1:(numCols / 2)
             % Reconstruct Low (L) component
-            originalCols(rowIndex, colIndex) = (transformedCols(elementIndex, colIndex) + transformedCols(elementIndex + numCols / 2, colIndex)) / 2;
+            originalCols(rowIndex, colIndex) = (transformedCols(elementIndex, colIndex) + transformedCols(elementIndex + numCols / 2, colIndex)) / scalingFactor;
 
             % Reconstruct High (H) component
-            originalCols(rowIndex + 1, colIndex) = (transformedCols(elementIndex, colIndex) - transformedCols(elementIndex + numCols / 2, colIndex)) / 2;
+            originalCols(rowIndex + 1, colIndex) = (transformedCols(elementIndex, colIndex) - transformedCols(elementIndex + numCols / 2, colIndex)) / scalingFactor;
 
             rowIndex = rowIndex + 2;
         end

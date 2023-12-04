@@ -1,13 +1,11 @@
 % Path to the image file
 imagePath = 'image_gs.png';
-
-% Check if the file exists
-if exist(imagePath, 'file') ~= 2
-    error('Image file does not exist.');
-end
+scalingFactor = 2;
+scalingFactor = sqrt(2);
 
 % Call the convertToGrayscale function
 grayImage = convertToGrayscale(imagePath);
+grayImage = im2double(grayImage); % Convert image to double
 
 % Initialize a new figure for displaying images
 figure;
@@ -19,14 +17,14 @@ title('Original Image');
 colormap(gray); % Apply grayscale color map
 
 %------------------------Haar Transform----------------------
-haarImage = haarTransform(grayImage);
+haarImage = haarTransform(grayImage, scalingFactor);
 subplot(2, 2, 2); % 2 rows, 2 columns, position 2
 imagesc(haarImage);
 title('Haar Transform');
 colormap(gray); % Apply grayscale color map
 
 %------------------------Inverse Haar Transform----------------------
-decompImage = inverseHaarTransform(haarImage);
+decompImage = inverseHaarTransform(haarImage, scalingFactor);
 subplot(2, 2, 3); % 2 rows, 2 columns, position 3
 imagesc(decompImage);
 title('Inverse Haar Transform');
@@ -36,6 +34,10 @@ colormap(gray); % Apply grayscale color map
 MSE = immse(grayImage, decompImage);
 RMSE = sqrt(MSE);
 PSNR = 10 * log10(256 * 256 / MSE);
+
+fprintf('\n The Mean-Squared Error (MSE) is %f\n', MSE);
+fprintf('\n The Root Mean-Squared Error (RMSE) is %f\n', RMSE);
+fprintf('\n The Peak Signal-to-Noise Ratio (PSNR) is %f dB\n', PSNR);
 
 % Plot MSE, RMSE, and PSNR in a single bar chart
 subplot(2, 2, 4); % 2 rows, 2 columns, position 4
