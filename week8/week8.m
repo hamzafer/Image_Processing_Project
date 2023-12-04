@@ -40,4 +40,11 @@ function[result] = week8(original, scale)
             result(i, j) = wa * original(x1, y1) + wb * original(x2, y1) + wc * original(x1, y2) + wd * original(x2, y2);
         end
     end
+    
+    % Resize the original image to match the dimensions of the result
+    originalResized = imresize(original, [h, w]);
+    
+    % Calculate SSIM
+    ssimValue = ssim(originalResized, result);
+    fprintf('SSIM between original and resized image: %.4f\n', ssimValue);
 end

@@ -2,16 +2,18 @@ function[] = week6(image)
     FT = fft2(image);
     magnitude = abs(FT);
     phase = angle(FT);
-    figure;
-    subplot(1,2,1)
-    imshow(log10(magnitude),[])
-    title("DFT magnitude in log10")
-    subplot(1,2,2)
-    imshow(log10(phase),[])
-    title("DFT phase in log10")
-     
-    F_shifted = fftshift(FT); % shift to center the low frequencies
     
+    % Plot the DFT magnitude and phase in one subplot with 2 columns
+    figure;
+    subplot(1, 2, 1)
+    imshow(log10(magnitude), [])
+    title("DFT magnitude in log10")
+    
+    subplot(1, 2, 2)
+    imshow(log10(phase), [])
+    title("DFT phase in log10")
+
+    F_shifted = fftshift(FT); % shift to center the low frequencies
     
     [rows, cols] = size(image);
     numPixels = rows * cols;
@@ -43,26 +45,38 @@ function[] = week6(image)
 
     % plot the results
     figure;
+    
+    % Plot the three error metrics in one subplot with 3 columns
+    subplot(1, 3, 1)
     plot(compressionRates, MSE, 'b');
     title('MSE vs. Compression Rate');
     xlabel('Compression Rate');
     ylabel('MSE');
 
-    figure;
+    subplot(1, 3, 2)
     plot(compressionRates, RMSE, 'r');
     title('RMSE vs. Compression Rate');
     xlabel('Compression Rate');
     ylabel('RMSE');
 
-    figure;
+    subplot(1, 3, 3)
     plot(compressionRates, PSNR, 'g');
     title('PSNR vs. Compression Rate');
     xlabel('Compression Rate');
     ylabel('PSNR');
-
-    figure;
-    subplot(1, 2, 1), imshow(image), title('Original Image');
-    subplot(1, 2, 2), imshow(abs(img_reconstructed), []), title(['Reconstructed Image at Compression Rate: ', num2str(compressionRates(k))]);
- 
-
+    
+    % Original Image
+    subplot(1, 3, 1)
+    imshow(image)
+    title('Original Image');
+    
+    % Reconstructed Image
+    subplot(1, 3, 2)
+    imshow(abs(img_reconstructed), [])
+    title(['Reconstructed Image at Compression Rate: ', num2str(compressionRates(k))]);
+    
+    % Fourier Transform
+    subplot(1, 3, 3)
+    imshow(log10(magnitude), [])
+    title("DFT magnitude in log10")
 end

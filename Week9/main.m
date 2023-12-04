@@ -63,3 +63,38 @@ for row = 1:8:256
         dctQuantizedBlocks(row:row+7, col:col+7) = quantizedBlock;
     end
 end
+
+% Select a block for demonstration
+blockRow = 1;
+blockCol = 1;
+
+% Extract the original, normalized, DCT, and quantized blocks for the specified location
+originalBlock = grayscaleImage(blockRow:blockRow+7, blockCol:blockCol+7);
+normalizedBlock = normalizedImage(blockRow:blockRow+7, blockCol:blockCol+7);
+dctBlock = dct2(normalizedBlock);
+quantizedBlock = round(dctBlock ./ jpegQuantMatrix);
+
+% Plotting the blocks
+figure;
+subplot(2,2,1);
+imshow(originalBlock, []);
+title('Original Block');
+colormap('gray')
+
+subplot(2,2,2);
+imshow(normalizedBlock, []);
+title('Block after Subtracting 128');
+colormap('gray')
+
+subplot(2,2,3);
+imshow(log(abs(dctBlock) + 1), []);
+colormap(jet); 
+colorbar;
+title('DCT of the Block');
+colormap('gray')
+
+subplot(2,2,4);
+imshow(quantizedBlock, []);
+title('Quantized Block');
+colormap('gray')
+

@@ -1,7 +1,7 @@
 % Path to the image file
 imagePath = 'image_gs.png';
 scalingFactor = 2;
-scalingFactor = sqrt(2);
+% scalingFactor = sqrt(2);
 
 % Call the convertToGrayscale function
 grayImage = convertToGrayscale(imagePath);
