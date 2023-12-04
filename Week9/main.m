@@ -25,9 +25,6 @@ dctQuantizedBlocks = zeros(size(normalizedImage));
 % Initialize the previous DC coefficient
 previousDC = 0;
 
-% Initialize encoded JPEG bitstream
-jpegBitstream = '';
-
 % Initialize a 1D array to store DC differences
 dcDifferences = [];
 
@@ -62,7 +59,7 @@ for row = 1:8:256
         encodedBlock = encodeCoefficients(zigzagSequence);
         encodedBlocks{end+1} = encodedBlock;
 
-        % Store the encoded block data
+        % Store the Quantization encoded block data
         dctQuantizedBlocks(row:row+7, col:col+7) = quantizedBlock;
     end
 end
