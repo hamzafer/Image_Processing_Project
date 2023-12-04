@@ -28,6 +28,12 @@ previousDC = 0;
 % Initialize encoded JPEG bitstream
 jpegBitstream = '';
 
+% Initialize a 1D array to store DC differences
+dcDifferences = [];
+
+% Initialize a 2D list to store AC blocks
+encodedBlocks = {};
+
 % Process each 8x8 block
 for row = 1:8:256
     for col = 1:8:256
@@ -45,21 +51,16 @@ for row = 1:8:256
         zigzagSequence = zigzagScan(quantizedBlock);
 
         % Step 9: Differential coding
-        % Encoding DC: DPCM
+        % Step 9.A: Encoding DC: DPCM
         dcDiff = zigzagSequence(1) - previousDC;
-        encodedDC = encodeDC(dcDiff);
+        dcDifferences(end + 1) = dcDiff;
 
-        % Encoding AC: in [(r,s), c] pattern
-        encodedAC = encodeAC(zigzagSequence);
-
-        % Combine DC and AC encoded data
-        encodedBlock = [encodedDC, encodedAC];
-
-        % Append the encoded data to the bitstream
-        jpegBitstream = [jpegBitstream, encodedBlock];
-
-        % Update the previous DC coefficient
+        % Step 9.A: Update the previous DC coefficient
         previousDC = zigzagSequence(1);
+
+        % Step 9.B: Encoding AC: in [(r,s), c] pattern
+        encodedBlock = encodeCoefficients(zigzagSequence);
+        encodedBlocks{end+1} = encodedBlock;
 
         % Store the encoded block data
         dctQuantizedBlocks(row:row+7, col:col+7) = quantizedBlock;
