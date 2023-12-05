@@ -56,3 +56,4 @@ fprintf('SSIM between original and resized image: %.4f\n', ssimValue);
 
 % Display the resized result
 imshow(result)
+title('Resized image using bilinear interpolation');

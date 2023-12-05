@@ -1,3 +1,5 @@
+% HAAR TRANSFORM
+
 % Path to the image file
 imagePath = 'image_gs.png';
 scalingFactor = 2;

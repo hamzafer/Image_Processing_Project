@@ -1,3 +1,5 @@
+% DCT AND WHT one time only
+
 % Path to the image file
 imagePath = 'image_gs.png';
 
@@ -20,7 +22,7 @@ imshow(log(abs(dctImage)),[]);
 title('DCT of the image');
 
 % Display selected low frequency DCT
-% Assuming you're keeping the top-left corner of the DCT coefficients
+% Keeping the top-left corner of the DCT coefficients
 selectedDCT = dctImage;
 selectedDCT(33:end, 33:end) = 0; % Zero out all but top-left 32x32 coefficients
 subplot(3, 4, 3);
@@ -40,7 +42,7 @@ imshow(log(abs(whtImage)), []);
 title('WHT of the image');
 
 % Display selected low frequency WHT
-% Assuming you're keeping the top-left corner of the WHT coefficients
+% Keeping the top-left corner of the WHT coefficients
 selectedWHT = whtImage;
 selectedWHT(33:end, 33:end) = 0; % Zero out all but top-left 32x32 coefficients
 subplot(3, 4, 6);

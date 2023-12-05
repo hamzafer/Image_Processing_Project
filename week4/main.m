@@ -78,7 +78,7 @@ diff6 = sum(sum((original_image - sh34).^2));
 [~, idx] = min([diff1, diff2, diff3, diff4, diff5, diff6]);
 methods = {median_filtered_blurred, mean_filtered_blurred, sh31, sh32, sh33, sh34};
 best_results{3} = method_names{idx};
-best_deblurred_image = methods{idx};
+best_deblurred_image3 = methods{idx};
 
 % Calculate gradients
 [gradient_x, gradient_y] = gradientCalc(original_image);
@@ -87,20 +87,20 @@ best_deblurred_image = methods{idx};
 magnitude = gradient_x.^2 - gradient_y.^2;
 
 % Display gradient images
-figure;
-imshow(gradient_x);
-title('Gradient X');
-saveas(gcf, 'gradientx2.jpg');
+% figure;
+% imshow(gradient_x);
+% title('Gradient X');
+% saveas(gcf, 'gradientx2.jpg');
 
-figure;
-imshow(gradient_y);
-title('Gradient Y');
-saveas(gcf, 'gradienty2.jpg');
+% figure;
+% imshow(gradient_y);
+% title('Gradient Y');
+% saveas(gcf, 'gradienty2.jpg');
 
-figure;
-imshow(magnitude);
-title('Magnitude');
-saveas(gcf, 'magnitude.jpg');
+% figure;
+% imshow(magnitude);
+% title('Magnitude');
+% saveas(gcf, 'magnitude.jpg');
 
 % Create subplots for gradient images
 figure;
@@ -121,7 +121,7 @@ imshow(magnitude);
 title('Magnitude');
 
 % Save the combined gradient figure
-saveas(gcf, 'combined_gradients.jpg');
+% saveas(gcf, 'combined_gradients.jpg');
 
 % Create subplots for salt & pepper denoising results
 figure;
@@ -158,7 +158,11 @@ imshow(blurred_image);
 title('Blurred Image');
 
 subplot(1, 3, 2);
-imshow(best_deblurred_image);
+imshow(best_deblurred_image3);
 title(['Best Deblurring: ' best_results{3}]);
+
+subplot(1, 3, 3);
+imshow(original_image - best_deblurred_image3);
+title('Difference (Original - Best Denoising)');
 
 subplot(1, 3, 3);
