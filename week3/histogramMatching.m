@@ -1,26 +1,31 @@
-function [matchedImg] = histogramMatching(img1, img2, options)
+function [matchedImage] = histogramMatching(image1, image2, options)
     if options == true
-        [~, probs1] = histogramEq(histogramCalc(img1), img1, 8);
-        [~, probs2] = histogramEq(histogramCalc(img2), img2, 8);
+        [~, probabilities1] = performHistogramEqualization(calculateHistogram(image1), image1, 8);
+        [~, probabilities2] = performHistogramEqualization(calculateHistogram(image2), image2, 8);
     else
-        [~, probs1] = histogramEq(histogramCalc(img1), img1, 8);
-        probs2 = img2;
+        [~, probabilities1] = performHistogramEqualization(calculateHistogram(image1), image1, 8);
+        probabilities2 = image2;
     end
-    % create a mapping for each intensity level
-    map = zeros(256, 1, 'uint8');
-    for i = 1:256 % intensity levels of source image
-        min = inf;
+    
+    % Create a mapping for each intensity level
+    mapping = zeros(256, 1, 'uint8');
+    
+    for i = 1:256 % Intensity levels of the source image
+        minDiff = inf;
         closestIndex = 1;
-        for j = 1:256 % intensity levels of reference image
-            diff = abs(probs1(i) - probs2(j)); 
-            if diff < min
-                min = diff;
-                closestIndex = j; % finding closest corresponding intensity level
+        
+        for j = 1:256 % Intensity levels of the reference image
+            difference = abs(probabilities1(i) - probabilities2(j));
+            
+            if difference < minDiff
+                minDiff = difference;
+                closestIndex = j; % Finding the closest corresponding intensity level
             end
         end
-        map(i) = closestIndex - 1;
+        
+        mapping(i) = closestIndex - 1;
     end
 
-    % apply mapping to img1
-    matchedImg = map(double(img1) + 1);
+    % Apply the mapping to image1
+    matchedImage = mapping(double(image1) + 1);
 end
