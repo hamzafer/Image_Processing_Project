@@ -27,7 +27,7 @@ subplot(2, 2, 1);
 imshow(original_image);
 title('Original Image');
 subplot(2, 2, 2);
-bar(histogramCalc(original_image_gray)); % Using histogramCalc for histogram
+bar(calculateHistogram(original_image_gray)); % Using histogramCalc for histogram
 title('Histogram of Original Image');
 
 % Target Image and Histogram
@@ -35,7 +35,7 @@ subplot(2, 2, 3);
 imshow(grayscale_image);
 title('Target Image');
 subplot(2, 2, 4);
-bar(histogramCalc(grayscale_image)); % Using histogramCalc for histogram
+bar(calculateHistogram(grayscale_image)); % Using histogramCalc for histogram
 title('Histogram of Target Image');
 
 % Matched Image and Histogram (to Original)
@@ -44,7 +44,7 @@ subplot(1, 2, 1);
 imshow(matched_image1);
 title('Image Matched to Original Histogram');
 subplot(1, 2, 2);
-bar(histogramCalc(matched_image1)); % Using histogramCalc for histogram
+bar(calculateHistogram(matched_image1)); % Using histogramCalc for histogram
 title('Histogram of Matched Image (Original)');
 
 % Matched Image and Histogram (to Random)
@@ -53,5 +53,5 @@ subplot(1, 2, 1);
 imshow(matched_image2);
 title('Image Matched to Random Histogram');
 subplot(1, 2, 2);
-bar(histogramCalc(matched_image2)); % Using histogramCalc for histogram
+bar(calculateHistogram(matched_image2)); % Using histogramCalc for histogram
 title('Histogram of Matched Image (Random)');
