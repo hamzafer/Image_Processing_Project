@@ -8,11 +8,6 @@ grayscale_image = convertToGrayscale(input_image_path);
 original_image = imread("week1_original.png"); % Read the original image
 original_image_gray = rgb2gray(original_image); % Convert to grayscale
 
-% Process the input image
-if size(grayscale_image, 3) == 3 % Check if the provided image is color
-    grayscale_image = rgb2gray(grayscale_image); % Convert to grayscale
-end
-
 % Histogram matching
 matched_image1 = histogramMatching(grayscale_image, original_image_gray, true); % Match to the original histogram
 

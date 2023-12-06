@@ -1,9 +1,20 @@
 function[result1, result2, result3, result4] = sharpening(image)
     % define kernels for applying filtering
-    kernel1 = [0 1 0; 1 -4 1; 0 1 0]; 
-    kernel2 = [1 1 1; 1 -8 1; 1 1 1];
-    kernel3 = [0 -1 0; -1 4 -1; 0 -1 0]; % laplacian filter
-    kernel4 = [-1 -1 -1; -1 8 -1; -1 -1 -1];
+    kernel1 = [ 0  1  0;
+                1 -4  1;
+                0  1  0];
+    
+    kernel2 = [ 1  1  1;
+                1 -8  1;
+                1  1  1];
+    
+    kernel3 = [ 0 -1  0;
+               -1  4 -1;
+                0 -1  0];
+    
+    kernel4 = [-1 -1 -1;
+               -1  8 -1;
+               -1 -1 -1];
 
     [rows, cols] = size(image);
     

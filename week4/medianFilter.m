@@ -8,6 +8,7 @@ function[result] = medianFilter(image, windowSize)
 
     % calculate the half window size
     halfW = floor(window/2);
+    
     % padding an image to fit the kernel  
     newIm = padarray(image, [halfW, halfW], 'symmetric');
 
