@@ -9,16 +9,6 @@ fourier_transform = fft2(gray_image);
 magnitude_spectrum = abs(fourier_transform); % Magnitude of the Fourier Transform
 phase_spectrum = angle(fourier_transform);    % Phase of the Fourier Transform
 
-% Plot the magnitude and phase spectra in a subplot with 2 columns
-% figure;
-% subplot(1, 2, 1)
-% imshow(log10(magnitude_spectrum), []) % Display the magnitude spectrum in log scale
-% title("Magnitude Spectrum (log scale)")
-% 
-% subplot(1, 2, 2)
-% imshow(log10(phase_spectrum), []) % Display the phase spectrum in log scale
-% title("Phase Spectrum (log scale)")
-
 % Shift the Fourier Transform to center the low frequencies
 shifted_ft = fftshift(fourier_transform);
 

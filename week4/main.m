@@ -18,7 +18,7 @@ blur_kernel = ones(window_width) / window_width ^ 2;
 blurred_image = imfilter(original_image, blur_kernel); 
 
 % Define names for denoising and deblurring methods
-method_names = {"Median", "Mean", "Laplacian", "Sharpening", "Laplacian", "Sharpening"};
+method_names = {"Median", "Mean", "Laplacian", "Laplacian", "Laplacian", "Laplacian"};
 
 % Initialize a cell array to store the best results
 best_results = {};
@@ -86,22 +86,6 @@ best_deblurred_image3 = methods{idx};
 % Calculate the magnitude of gradients
 magnitude = gradient_x.^2 - gradient_y.^2;
 
-% Display gradient images
-% figure;
-% imshow(gradient_x);
-% title('Gradient X');
-% saveas(gcf, 'gradientx2.jpg');
-
-% figure;
-% imshow(gradient_y);
-% title('Gradient Y');
-% saveas(gcf, 'gradienty2.jpg');
-
-% figure;
-% imshow(magnitude);
-% title('Magnitude');
-% saveas(gcf, 'magnitude.jpg');
-
 % Create subplots for gradient images
 figure;
 
@@ -119,9 +103,6 @@ title('Gradient Y');
 subplot(1, 3, 3);
 imshow(magnitude);
 title('Magnitude');
-
-% Save the combined gradient figure
-% saveas(gcf, 'combined_gradients.jpg');
 
 % Create subplots for salt & pepper denoising results
 figure;
