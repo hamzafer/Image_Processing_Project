@@ -2,11 +2,8 @@
 
 img_path = 'image_gs.png';
 
-% Load the image
-img = imread(img_path);
-if size(img, 3) == 3
-    img = rgb2gray(img); % Convert to grayscale if necessary
-end
+% Call the function to convert the image to grayscale
+img = convertToGrayscale(inputImagePath);
 
 % Perform segmentation
 segmented = performImageSegmentation(img);

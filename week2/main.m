@@ -4,12 +4,6 @@ inputImagePath = 'image_gs.png';
 % Call the function to convert the image to grayscale
 grayscaleImage = convertToGrayscale(inputImagePath);
 
-% Check if the image is initially in color
-if size(grayscaleImage, 3) == 3
-    % Convert the color image to grayscale
-    grayscaleImage = rgb2gray(grayscaleImage);
-end
-
 % Calculate the histogram of the grayscale image
 histogramData = calculateHistogram(grayscaleImage);
 
