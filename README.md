@@ -13,6 +13,10 @@ This comprehensive MATLAB project spans multiple weeks, focusing on advanced ima
 - **Week 8:** Creative image resizing techniques.
 - **Week 9:** JPEG compression steps and color quantization techniques.
 
+## Some Results
+<img width="1071" alt="image" src="https://github.com/hamzafer/Image_Processing_Project/assets/45764331/90ce4a9a-b393-4a97-8fa1-2c127d3342c9">
+<img width="1071" alt="image" src="https://github.com/hamzafer/Image_Processing_Project/assets/45764331/98407f33-1661-4fff-8fe6-5530b7502413">
+
 ## Technologies Used
 - MATLAB
 - Image Processing Toolbox
